@@ -3,11 +3,16 @@ TTS 语音合成抽象层 v2
 支持 SAMI(剪映) / edge-tts(微软) / macOS say
 统一接口: synthesize() -> TTSSynthesis
 """
-import os, sys, glob, json, subprocess, tempfile, time as _time
+import glob
+import os
+import subprocess
+import sys
+import tempfile
+import time as _time
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import List, Optional
 from contextlib import contextmanager
+from dataclasses import dataclass, field
+from typing import List
 
 
 @dataclass
@@ -185,7 +190,8 @@ def auto_detect_tts() -> TTSProvider:
     if os.path.exists(skill_root):
         return SAMITTS()
     try:
-        import edge_tts; return EdgeTTS()
+        import edge_tts  # noqa: F401
+        return EdgeTTS()
     except ImportError:
         pass
     if sys.platform == "darwin":

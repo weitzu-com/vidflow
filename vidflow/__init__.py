@@ -10,11 +10,11 @@ vidflow — AI 短视频自动生产 SDK
     pipe.run(topic="安史之乱", style="dark_cinematic", duration=60)
 """
 
-from .pipeline import Pipeline
-from .tts import TTSProvider, SAMITTS, EdgeTTS, MacOSTTS
-from .video import SeedanceProvider
 from .assemble import FFmpegAssembler
+from .pipeline import Pipeline
 from .prompts import PROMPT_TEMPLATES, apply_style
+from .tts import SAMITTS, EdgeTTS, MacOSTTS, TTSProvider
+from .video import SeedanceProvider
 
 __version__ = "0.1.0"
 __all__ = [

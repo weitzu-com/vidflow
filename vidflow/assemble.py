@@ -2,8 +2,11 @@
 FFmpeg 视频合成引擎 v2
 唯一临时目录 + 空视频回退 + 异常安全清理
 """
-import os, subprocess, tempfile, shutil
-from typing import List, Optional, Tuple
+import os
+import shutil
+import subprocess
+import tempfile
+from typing import List, Tuple
 
 
 def _find_ffmpeg() -> str:

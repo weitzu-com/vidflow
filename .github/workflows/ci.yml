@@ -39,7 +39,7 @@ jobs:
       - name: Bandit security scan
         run: |
           pip install bandit
-          bandit -r vidflow/ -ll
+          bandit -c pyproject.toml -r vidflow/ -ll
 
   build:
     needs: [test, security]

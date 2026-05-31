@@ -2,10 +2,14 @@
 Seedance API 视频生成封装 v2
 审核规避改进 + rate limit 保护 + 完整错误处理
 """
-import os, time, requests, threading
+import os
+import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
-from typing import List, Optional, Dict
+from typing import Dict, List, Optional
+
+import requests
 
 
 @dataclass
@@ -90,7 +94,8 @@ class SeedanceProvider:
                 headers=self.headers, timeout=10
             )
             if r2.status_code != 200:
-                time.sleep(5); continue
+                time.sleep(5)
+                continue
             d = r2.json()
             s = d.get("status")
             if s != last_status:
@@ -121,7 +126,7 @@ class SeedanceProvider:
             for s in scenes:
                 try:
                     results[s.name] = self.generate_one(s)
-                except Exception as e:
+                except Exception:
                     results[s.name] = None
             return results
 
@@ -132,6 +137,6 @@ class SeedanceProvider:
                 name = futures[f]
                 try:
                     results[name] = f.result()
-                except Exception as e:
+                except Exception:
                     results[name] = None
         return results

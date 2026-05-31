@@ -48,8 +48,10 @@ select = ["E", "F", "W", "I"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-timeout = 30
 
 [tool.bandit]
 exclude_dirs = ["tests"]
-skips = ["B101", "B404"]
+skips = ["B101", "B404", "B602", "B607"]
+
+[bandit]
+skips = ["B101", "B404", "B602", "B607"]

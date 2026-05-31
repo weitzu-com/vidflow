@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vidflow"
+version = "0.1.0"
+description = "AI short-video production SDK — five-stage automated pipeline from script to final MP4"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "vidflow contributors"}]
+keywords = ["video", "ai", "seedance", "tts", "ffmpeg", "automation", "short-video", "pipeline"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+tts = ["edge-tts>=7.0"]
+dev = ["pytest>=7", "pytest-timeout", "ruff", "bandit", "build"]
+all = ["vidflow[tts,dev]"]
+
+[project.urls]
+Homepage = "https://github.com/weitzu-com/vidflow"
+Repository = "https://github.com/weitzu-com/vidflow"
+Issues = "https://github.com/weitzu-com/vidflow/issues"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+timeout = 30
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101", "B404"]
